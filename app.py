@@ -88,6 +88,13 @@ if st.session_state.game_over:
     st.markdown(f"### 最終分數：{st.session_state.score}")
     if st.button("重新開始"):
         st.session_state.initialized = False
+        st.session_state.hp = MAX_HP
+        st.session_state.score = 0
+        st.session_state.scene = "魔法森林"
+        st.session_state.weather = "晴天"
+        st.session_state.start_time = time.time()
+        st.session_state.game_over = False
+        st.session_state.coach_message = "重置完成！教官等你再戰！🔥"
         st.experimental_rerun()
     st.stop()
 
