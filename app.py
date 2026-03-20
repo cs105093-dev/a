@@ -88,6 +88,16 @@ if st.session_state.is_game_over:
     st.markdown(f"### 最終分數：{st.session_state.score}")
     if st.button("重新開始"):
         st.session_state.initialized = False
+        st.session_state.is_game_over = False
+        st.session_state.hp = MAX_HP
+        st.session_state.score = 0
+        st.session_state.scene = "夜市廢墟"
+        st.session_state.weather = "霓虹暴雨"
+        st.session_state.loot = []
+        st.session_state.start_time = time.time()
+        st.session_state.voice_line = 0
+        st.session_state.action_count = 0
+        st.session_state.toxic_message = "你這個垃圾貨，連機器人都看不下去。"
         st.experimental_rerun()
     st.stop()
 
@@ -105,7 +115,6 @@ with col1:
             "好歹給我看點血。"
         ])
         st.session_state.action_count += 1
-        st.experimental_rerun()
 with col2:
     if st.button("🛠 緊急補血"):
         heal = random.randint(12, 24)
@@ -117,7 +126,6 @@ with col2:
             "好吧，就勉強給你。"
         ])
         st.session_state.action_count += 1
-        st.experimental_rerun()
 with col3:
     can_open_loot = len(st.session_state.loot) > 0
     if st.button("🎁 砸開寶箱") and can_open_loot:
@@ -126,9 +134,9 @@ with col3:
         st.session_state.hp = min(MAX_HP, st.session_state.hp + random.randint(6, 14))
         st.balloons()
         st.success(f"獲得：{item}！HP + 衝分！")
-        st.experimental_rerun()
     if not can_open_loot:
         st.write("無寶箱可開")
+
 
 # 隨機寶箱觸發
 if st.session_state.action_count > 0 and st.session_state.action_count % 4 == 0:
