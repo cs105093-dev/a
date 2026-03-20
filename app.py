@@ -43,7 +43,7 @@ MAX_HP = 120
 LOOT_TABLE = ["⛓ 電流手套", "🧠 智能記憶芯片", "⚡ 震盪手雷", "🛡 冰霜護甲", "🔥 能量核心"]
 
 # 初始化狀態
-if 'initialized' not in st.session_state:
+if 'initialized' not in st.session_state or not st.session_state.get('initialized', False):
     st.session_state.initialized = True
     st.session_state.hp = MAX_HP
     st.session_state.score = 0
